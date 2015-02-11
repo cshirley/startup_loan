@@ -1,6 +1,5 @@
 module StartupLoan
   class ReferenceData < BaseModel
-
     def self.resource_name
       "applicants/ref_data"
     end
@@ -10,7 +9,7 @@ module StartupLoan
     end
 
     def self.build_url(resource_action)
-      resource_action == :search ? self.resource_name : super
+      resource_action == :search ? resource_name : super
     end
 
     def self.process_response(connection, response)
@@ -19,6 +18,5 @@ module StartupLoan
         arr << new(connection, data, true)
       end
     end
-
   end
 end
