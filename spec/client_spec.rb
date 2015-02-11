@@ -14,16 +14,14 @@ describe "client" do
   end
 
   describe "sessions" do
-
     it "fails due to invalid api_key" do
       VCR.use_cassette("client_session_invalid_api_key") do
-        expect {
+        expect do
           invalid_client = StartupLoan::Client.new( settings.merge(api_key:"foobar") )
           invalid_client.applicants
-        }.to raise_error(StartupLoan::AuthenticationError)
+        end.to raise_error(StartupLoan::AuthenticationError)
       end
     end
   end
-
 end
 
