@@ -11,6 +11,10 @@ module StartupLoan
       set_all_attributes(options, loaded_from_server)
     end
 
+    def is_new?
+      @is_new
+    end
+
     def self.resource_name
       name.split('::').last.downcase + 's'
     end
@@ -21,7 +25,7 @@ module StartupLoan
 
     def self.find(connection, params = {})
       process_response(connection,
-                      connection.query_get_api(build_url(:search), params))
+                       connection.query_get_api(build_url(:search), params))
     end
 
     def self.process_response(connection, response)
@@ -30,11 +34,17 @@ module StartupLoan
       end
     end
 
+    def attribute_names
+      @attributes.keys
+    end
+
     def save
       return self unless is_dirty?
-      options = { self.class.resource_name => [build_changed_data] }.merge(build_session_data)
-      response = connection.query_post_api(self.class.build_url(:add), options)
-      set_all_attributes(response[self.class.resource_name].first, true) if response['size'] > 0
+      options = { self.class.resource_name => [build_changed_data] }
+      url = self.class.build_url(is_new? ? :add : :update)
+      response = connection.query_post_api(url, options)
+      raise StartupLoan::ApiException.new(0,response.errors.join("\n")) unless response.success
+      set_all_attributes(response.results.first, true)
       self
     end
 
@@ -63,13 +73,9 @@ module StartupLoan
       end
     end
 
-    def build_session_data
-      { sessionid: session[:session_id] }
-    end
-
     def build_changed_data
       get_dirty_attributes.keys.inject({}) do |h, k|
-        if @attributes[k][:value] && k != 'id' && !@attributes[k][:value].to_s.empty?
+        if @attributes[k][:value] && !@attributes[k][:value].to_s.empty?
           h[k] = @attributes[k][:value]
         end
         h
@@ -95,6 +101,7 @@ module StartupLoan
     end
 
     def set_all_attributes(attributes, loaded = false)
+      @is_new = !loaded
       attributes.each do |k, v|
         if self.respond_to? k
           send("#{k}=", v)
@@ -106,8 +113,8 @@ module StartupLoan
 
     def set_attribute(key, value, loaded = false)
       @attributes[key] = { old_value: get_attribute(key) || value,
-                            value: value,
-                            is_dirty: !loaded || get_attribute(key) == value }
+                           value: value,
+                           is_dirty: !loaded || get_attribute(key) == value }
       true
     end
   end
