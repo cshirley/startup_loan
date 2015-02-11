@@ -27,18 +27,17 @@ Or install it yourself as:
 Create Client:
 
 ```ruby
-client = StartupLoan::Client.new({ oauth_token: "oauth_token",
-                                  oauth_secret: "oauth_secret",
-                                  base_uri: "https://app.rb-logistics.com" }
+client = StartupLoan::Client.new({ base_uri: "http://....",
+                                  api_key: "super_secret_squirrel"})
 )
 ```
 De-dupe check
 ```ruby
-query_options = { email:email_address,
-                  post_code:post_code,
-                  phone_number:phonenumber }
-does_user_exist = client.service_by_alternate_delivery_partner?(query_options)
+query_options = { emailaddress:"email_address",
+                  postcode:"post_code",
+                  phone_number:"phonenumber" }
 
+true_or_false = StartupLoan::Applicant.has_duplicate?(client, query_options)
 ```
 
 
