@@ -21,15 +21,17 @@ module StartupLoan
     end
 
     def query_post_api(url, options)
+      options.merge!(accessKey:api_key)
       response = session.post do |req|
         req.url url
         req.headers['Content-Type'] = 'application/json'
         req.body = options.to_json
       end
-      JSON.parse(response.body)
+      ApiResponse.new response.body
     end
 
     def query_post_file(url, options, field_name, file_path)
+      options.merge!(accessKey:api_key)
       mime_type = get_mime_type(file_path)
       options[field_name] = Faraday::UploadIO.new(file_path, mime_type)
       response = session.post url, options
