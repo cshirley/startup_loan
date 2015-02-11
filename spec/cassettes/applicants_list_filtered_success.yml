@@ -1,0 +1,84 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.uat.sulserver.net/applicants/search?accessKey=iGy8G5dUmr9HXINAOc7MIG9m1bd8bv8K&surname=shirley
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 11 Feb 2015 14:30:44 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Frame-Options:
+      - SAMEORIGIN
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"numResults":32,"results":[{"DUPLICATE":"This appears
+        to be a duplicate of existing record 97096. Please contact ops-admin@startuploans.co.uk"},{"DUPLICATE":"This
+        appears to be a duplicate of existing record 91628. Please contact ops-admin@startuploans.co.uk"},{"DUPLICATE":"This
+        appears to be a duplicate of existing record 88859. Please contact ops-admin@startuploans.co.uk"},{"DUPLICATE":"This
+        appears to be a duplicate of existing record 88114. Please contact ops-admin@startuploans.co.uk"},{"DUPLICATE":"This
+        appears to be a duplicate of Record 79089, who is engaged with Norfolk & Waveney
+        Enterprise Services."},{"DUPLICATE":"This appears to be a duplicate of existing
+        record 78933, who is engaged with Let''s do Business Group."},{"DUPLICATE":"This
+        appears to be a duplicate of Record 78824, who is engaged with NWES (VSU)."},{"DUPLICATE":"This
+        appears to be a duplicate of existing record 77005. Please contact ops-admin@startuploans.co.uk"},{"DUPLICATE":"This
+        appears to be a duplicate of Record 76521, drawn down with NEA - GLE."},{"DUPLICATE":"This
+        appears to be a duplicate of existing record 75275, who is engaged with Let''s
+        do Business Group."},{"DUPLICATE":"This appears to be a duplicate of Record
+        71077, drawn down with NEA - GLE."},{"appid":64459,"journeystatus":9,"manadd":1,"firstname":"Danny","surname":"Searle","dob":"1985-07-13","address1":"4
+        Heigham Grove","address2":null,"address3":null,"citytown":"Norwich","county":"Norfolk","emailaddress":"sulcrm+64459@tcltesting.com","telephone":"7817501828","gender":"Male","natins":"JR472559D","skillsiccode":10,"skillis":null,"skillsother":null,"loanamount":10000,"loanterm":"24
+        months","ethnicity_new":1,"eucitizen":1,"visadate":null,"qualification":4,"employmentstatus":12,"exforces":0,"sharia":null,"is_nea_participant":null,"cjmentor":1,"mentorname":"Anthony
+        Trollope","mentoringactive":null,"mentoringactivenotes":null,"wherehearnew":3,"referral_partner":null,"marketingagree":1,"personaldata":null,"casestudycomplete":null,"otherfinancevalue":"0","otherfinancesource":"None","subsequentfinancevalue":null,"subsequentfinancesource":null,"subdate":"2014-02-03
+        00:00:00","applicationdate":"2014-02-03 00:00:00","declined_reason":null,"repaymentholiday":0,"repaymentholidaylength":"None","offerdate":"2014-03-17
+        00:00:00","drawdowndate":"2014-04-10 00:00:00","statusatrepayment":null,"loanwrittenoffdate":null,"loanwrittenoffamount":null,"companyname":null,"companynumber":null,"returningtowork":0,"notes":null,"dp_appid":null,"dp_loanids":["SUL01662"],"postcode":"NR2
+        3DQ","district_desc":"Norwich","constituency":"Norwich South","assigneddp":82,"loan_id":"SM64459"},{"DUPLICATE":"This
+        appears to be a duplicate of Record 63964, drawn down with NEA-LDBG."},{"DUPLICATE":"This
+        appears to be a duplicate of Record 61004, who is engaged with Norfolk & Waveney
+        Enterprise Services."},{"DUPLICATE":"This appears to be a duplicate of Record
+        61756, drawn down with School for Start Ups."},{"DUPLICATE":"This appears
+        to be a duplicate of existing record 56846. Please contact ops-admin@startuploans.co.uk"},{"DUPLICATE":"This
+        appears to be a duplicate of existing record 55072. Please contact ops-admin@startuploans.co.uk"},{"DUPLICATE":"This
+        appears to be a duplicate of existing record 52139. Please contact ops-admin@startuploans.co.uk"},{"DUPLICATE":"This
+        appears to be a duplicate of existing record 42773. Please contact ops-admin@startuploans.co.uk"},{"DUPLICATE":"This
+        appears to be a duplicate of Record 35635, drawn down with School for Start
+        Ups."},{"DUPLICATE":"This appears to be a duplicate of existing record 34309.
+        Please contact ops-admin@startuploans.co.uk"},{"DUPLICATE":"This appears to
+        be a duplicate of existing record 33523, who is engaged with Start Up Direct."},{"DUPLICATE":"This
+        appears to be a duplicate of existing record 32862. Please contact ops-admin@startuploans.co.uk"},{"DUPLICATE":"This
+        appears to be a duplicate of existing record 24141. Please contact ops-admin@startuploans.co.uk"},{"DUPLICATE":"This
+        appears to be a duplicate of Record 23719, drawn down with Fredericks Foundation
+        (CDFA consortium loans)."},{"DUPLICATE":"This appears to be a duplicate of
+        Record 23921, assessed by School for Start Ups."},{"DUPLICATE":"This appears
+        to be a duplicate of Record 19871, who is engaged with South West Investment
+        Group."},{"DUPLICATE":"This appears to be a duplicate of Record 12270, who
+        is engaged with WSX Enterprise."},{"DUPLICATE":"This appears to be a duplicate
+        of existing record 7562. Please contact ops-admin@startuploans.co.uk"},{"DUPLICATE":"This
+        appears to be a duplicate of Record 24932, assessed by GLE."},{"DUPLICATE":"This
+        appears to be a duplicate of Record 5065, who is engaged with Let''s do Business
+        Group."},{"DUPLICATE":"This appears to be a duplicate of Record 17627, drawn
+        down with Rockstar Youth."}]}'
+    http_version: 
+  recorded_at: Wed, 11 Feb 2015 14:30:44 GMT
+recorded_with: VCR 2.9.3

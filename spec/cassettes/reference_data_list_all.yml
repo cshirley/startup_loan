@@ -1,0 +1,92 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.uat.sulserver.net/applicants/ref_data?accessKey=iGy8G5dUmr9HXINAOc7MIG9m1bd8bv8K
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 11 Feb 2015 14:30:44 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Frame-Options:
+      - SAMEORIGIN
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"results":{"journeystatus":{"name":"Status","description":"current
+        status of applicant","values":{"1":"Registered","2":"Initial contact attempted","3":"Initial
+        contact made","4":"Pre-application support","5":"Application submitted","6":"Application
+        assessed by DP","7":"Approved","8":"Declined","9":"Drawn Down","10":"Repayments
+        ongoing","11":"Loan in default","12":"Loan written off","13":"Loan repaid","14":"Application
+        withdrawn","15":"Newsletter registration"}},"gender":{"name":"Gender of Borrower","description":null,"values":{"Male":"Male","Female":"Female"}},"skillis":{"name":"Applicant''s
+        selected sector","description":null,"values":{"1":"Agriculture","2":"Charity","3":"Construction","4":"Education","5":"Engineering","6":"Finance","7":"Healthcare","8":"Hospitality","9":"IT","10":"Manufacturing","11":"Project
+        Management","12":"Retail","13":"Security","14":"Travel","15":"Other","16":"Web","17":"Fashion","18":"Graphic
+        Design","19":"Creative","20":"Fashion","21":"Food\/Drink","22":"Leisure\/Sport","23":"Manual
+        Services","24":"Manufacturing","25":"Professional Services","26":"Social Enterprise","27":"Technology"}},"ethnicity_new":{"name":"Ethnicity","description":null,"values":{"1":"English
+        \/ Welsh \/ Scottish \/ Northern Irish \/ British","2":"Irish","3":"Gypsy
+        or Irish Traveller","4":"Any other White background","5":"White and Black
+        Caribbean","6":"White and Black African","7":"White and Asian","8":"Any other
+        Mixed background","9":"Indian","10":"Pakistani","11":"Bangladeshi","12":"Chinese","13":"Any
+        other Asian background","14":"African","15":"Caribbean","16":"Any other Black
+        \/ African \/ Caribbean background","17":"Arab","18":"Any other ethnic group","19":"Prefer
+        not to say"}},"qualification":{"name":"Qualification Level","description":"Qualification
+        Level immediately prior to\/at point of engagement with DP","values":{"1":"Level
+        8","2":"Level 7","3":"Level 6","4":"Level 5","5":"Level 4","6":"Level 3","7":"Level
+        2","8":"Level 1","9":"Entry Level","10":"None","11":"Other"}},"employmentstatus":{"name":"Employment
+        Status","description":"Employment Status immediately prior to\/at point of
+        engagement with DP","values":{"12":"Self-employed","1":"Unemployed","2":"Employee
+        (Full Time)","3":"Employee (Part Time)","4":"Casual Work","5":"Work Based
+        Training (e.g. Apprenticeship)","6":"Student (Institution-based)","7":"Volunteering\/Internship","8":"Travelling
+        (e.g. Gap Year)","9":"Medical Treatment","10":"Custodial Sentence","11":"Other
+        Inactive"}},"wherehearnew":{"name":"How Found out about Start-Up Loans","description":"Select
+        principal method or channel","values":{"15":"Bus Advertisement","1":"Startup
+        Loans Website","2":"Delivery Partner Website","3":"Social Media","4":"Radio
+        or TV","5":"Newspaper or Magazine","6":"Word of Mouth (Friends or Family)","7":"Club,
+        Society or Place of Worship","8":"Job Centre","9":"Public Library or Information
+        Centre","10":"Bank or Building Society","11":"Roadshow, Careers Fair or Exhibition","12":"University\/Student
+        Ambassador","13":"Online Press","14":"Other","16":"Business Advisor","17":"Search
+        Engine","18":"Local Council"}},"otherfinancesource":{"name":"Source of other
+        finance committed to Business at Start-Up","description":"Select principal
+        source (if applicable)","values":{"Student Loan":"Student Loan","Personal
+        Savings":"Personal Savings","Credit Card":"Credit Card","Bank Overdraft":"Bank
+        Overdraft","Friends and Family":"Friends and Family","Grant":"Grant","None":"None","Other":"Other"}},"subsequentfinancesource":{"name":"Source
+        of any subsequent finance secured after first Start Up Loan","description":null,"values":{"Top
+        up Start Up Loan":"Top up Start Up Loan","Delivery Partner":"Delivery Partner","Personal
+        Savings":"Personal Savings","Credit Card":"Credit Card","Bank Overdraft":"Bank
+        Overdraft","Friends and Family":"Friends and Family","Grant":"Grant","None":"None","Other":"Other"}},"declined_reason":{"name":"Reason
+        for declining","description":"Inadequate business plan and\/or cash flow","values":{"1":"Inadequate
+        business plan and\/or cash flow","2":"Over-indebtedness and\/or recent history
+        of default","3":"Trading longer than 12 months","4":"Business is outside credit
+        policy","5":"Use of funds is outside credit policy","6":"Hobby proposal","7":"Existing
+        SUL recipient","8":"Outstanding bankruptcy","9":"Concerns over fraud","10":"Other
+        (please add to notes section)"}},"repaymentholidaylength":{"name":"Length
+        of Capital Repayment Holiday","description":"Capital Repayment Holiday Length
+        in Months If Provided (Must be 3, 6, 9 or 12 months)","values":{"3 months":"3
+        months","6 months":"6 months","9 months":"9 months","12 months":"12 months","None":"None"}},"statusatrepayment":{"name":"Registration","description":"How
+        the applicant registered for contact","values":{"To original schedule":"To
+        original schedule ","Extended terms":"Extended terms","Early repayment":"Early
+        repayment"}}}}'
+    http_version: 
+  recorded_at: Wed, 11 Feb 2015 14:30:44 GMT
+recorded_with: VCR 2.9.3

@@ -1,0 +1,45 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.uat.sulserver.net/applicants/ref_data?accessKey=iGy8G5dUmr9HXINAOc7MIG9m1bd8bv8K&type=journeystatus
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 11 Feb 2015 14:30:44 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Frame-Options:
+      - SAMEORIGIN
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"results":{"journeystatus":{"name":"Status","description":"current
+        status of applicant","values":{"1":"Registered","2":"Initial contact attempted","3":"Initial
+        contact made","4":"Pre-application support","5":"Application submitted","6":"Application
+        assessed by DP","7":"Approved","8":"Declined","9":"Drawn Down","10":"Repayments
+        ongoing","11":"Loan in default","12":"Loan written off","13":"Loan repaid","14":"Application
+        withdrawn","15":"Newsletter registration"}}}}'
+    http_version: 
+  recorded_at: Wed, 11 Feb 2015 14:30:44 GMT
+recorded_with: VCR 2.9.3
