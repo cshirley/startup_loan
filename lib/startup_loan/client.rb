@@ -2,14 +2,25 @@ module StartupLoan
   class Client
     include ApplicantExtension
 
-    attr_accessor :base_uri, :api_key
+    DEFAULT_OPTIONS = {debug:false, logfile_path:"startup_loans.log"}
+
+    attr_accessor :base_uri, :api_key, :debug, :logfile_path
 
     def initialize(options = { base_uri: nil, api_key: nil })
+
+      options = DEFAULT_OPTIONS.merge(options)
+
       fail ArgumentError.new('You must specifiy valid options') unless options.keys.count > 0
+
       options.each do |k, v|
-        fail ArgumentError.new("#{k} can not be nil or empty") if v.nil? || v.empty?
+
+        fail ArgumentError.new("#{k} can not be nil or empty") if v.nil? || v.to_s.empty?
         send("#{k}=", v)
+
       end
+
+      logger.level = Logger::DEBUG
+
     end
 
     def make_request_url(url, options)
@@ -53,8 +64,13 @@ module StartupLoan
       Faraday::Utils.build_nested_query(options)
     end
 
+    def logger
+      @logger ||= Logger.new(logfile_path)
+    end
+
     def session
       @connection ||= ::Faraday.new(base_uri) do |conn|
+        conn.response :detailed_logger, logger if debug
         conn.request :multipart
         conn.adapter Faraday.default_adapter
         conn.use Faraday::Response::StartupLoan

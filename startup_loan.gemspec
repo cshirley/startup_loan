@@ -37,5 +37,6 @@ Gem::Specification.new do |spec|
   end
 
   spec.add_dependency "faraday"
+  spec.add_dependency "faraday-detailed_logger"
   spec.add_dependency "json"
 end

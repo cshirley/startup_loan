@@ -1,0 +1,62 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://api.uat.sulserver.net/applicants/add
+    body:
+      encoding: UTF-8
+      string: '{"applicants":[{"journeystatus":1,"manadd":1,"firstname":"clive","surname":"shirley","dob":"1971-09-14","address1":"1
+        Croydon","address2":"12 Addiscomb Road","citytown":"Croydon","county":"surrey","postcode":"CR00PG","emailaddress":"test_user@foobar.com","telephone":"0777777777","gender":"Male","wherehearnew":14,"marketingagree":1,"referral_partner":0,"subdate":"2015-02-12
+        15:20:18 +0100"}],"accessKey":"iGy8G5dUmr9HXINAOc7MIG9m1bd8bv8K"}'
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 12 Feb 2015 14:20:26 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Frame-Options:
+      - SAMEORIGIN
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"results":{"0":{"skillsiccode":["This field needs to
+        be from the SIC Code List, two digit string (01-99)"],"skillis":["An invalid
+        value has been provided for skillis"],"ethnicity_new":["An invalid value has
+        been provided for ethnicity_new"],"eucitizen":["eucitizen must be either 1
+        (Yes) or 0 (No)"],"qualification":["An invalid value has been provided for
+        qualification"],"employmentstatus":["An invalid value has been provided for
+        employmentstatus"],"exforces":["exforces must be either 1 (Yes) or 0 (No)"],"sharia":["sharia
+        must be either 1 (Yes) or 0 (No)"],"is_nea_participant":["is_nea_participant
+        must be either 1 (Yes) or 0 (No)"],"cjmentor":["cjmentor must be either 1
+        (Yes) or 0 (No)"],"mentoringactive":["mentoringactive must be either 1 (Yes)
+        or 0 (No)"],"personaldata":["personaldata must be either 1 (Yes) or 0 (No)"],"casestudycomplete":["casestudycomplete
+        must be either 1 (Yes) or 0 (No)"],"otherfinancesource":["An invalid value
+        has been provided for otherfinancesource"],"subsequentfinancesource":["An
+        invalid value has been provided for subsequentfinancesource"],"declined_reason":["An
+        invalid value has been provided for declined_reason"],"repaymentholiday":["repaymentholiday
+        must be either 1 (Yes) or 0 (No)"],"repaymentholidaylength":["An invalid value
+        has been provided for repaymentholidaylength"],"statusatrepayment":["An invalid
+        value has been provided for statusatrepayment"],"returningtowork":["returningtowork
+        must be either 1 (Yes) or 0 (No)"]},"successful":0,"failed":1,"total":1}}'
+    http_version: 
+  recorded_at: Thu, 12 Feb 2015 14:20:26 GMT
+recorded_with: VCR 2.9.3
