@@ -9,6 +9,8 @@ shared_context "configuration" do
   let(:client) { StartupLoan::Client.new(settings) }
 
   let(:reference_type_names) do
-    %w(journeystatus gender skillis ethnicity_new qualification employmentstatus wherehearnew otherfinancesource subsequentfinancesource declined_reason repaymentholidaylength statusatrepayment)
+    %w(journeystatus gender skillis ethnicity_new qualification
+       employmentstatus wherehearnew otherfinancesource subsequentfinancesource
+       declined_reason repaymentholidaylength statusatrepayment)
   end
 end

@@ -23,7 +23,7 @@ describe "Applicant API" do
   end
   it "lists all applicants" do
     VCR.use_cassette("applicants_list_all_success") do
-      partner_applicants = StartupLoan::Applicant.find(client)
+      expect(StartupLoan::Applicant.find(client).class).to be Array
     end
   end
 
@@ -42,20 +42,15 @@ describe "Applicant API" do
   end
 
   it "Adds applicant Registration state" do
+    pending "Waiting on startuploans"
     #VCR.use_cassette("application_add_new_registration") do
-    applicant = StartupLoan::Applicant.new(client, new_applicant)
-    begin
+      applicant = StartupLoan::Applicant.new(client, new_applicant)
       applicant.save
-    rescue StandardError => ex
-      applicant.attributes.each { |k,v| puts "#{k}:#{v[:value]}" }
-      errors = ex.errors.count == 1 ? ex.errors.first : ex.errors
-      errors.each { |k,v| puts "#{k}:#{v}" }
-      raise
-    end
     #end
   end
 
   it "Updates applicant" do
+    pending "Waiting on startuploans"
     partner_applicants = StartupLoan::Applicant.find(client, journeystatus:1)
     applicant = partner_applicants.first
     applicant.loanamount = 10_000

@@ -1,29 +1,29 @@
 module StartupLoan
   class ApiResponse
-    attr_accessor :success, :result_count, :results, :error_code, :errors
+    attr_reader :success, :result_count, :results,
+                :error_code, :errors, :stats
 
     def initialize(data)
       @json = JSON.parse(data)
-      self.success = @json['success'] && !has_error?
+      @success = @json['success'] && !has_error?
       @json['results'].is_a?(Hash) ? parse_post : parse_get
     end
 
     def parse_post
-      failed_count =  @json["results"].delete("failed")
-      success_count =  @json["results"].delete("successful")
-      total_count =  @json["results"].delete("total")
-
+      @stats = { failed:  @json["results"].delete("failed"),
+                 success: @json["results"].delete("successful"),
+                 total:   @json["results"].delete("total") }
       if success
-        self.results = @json["results"]
-        self.result_count = total_count
+        @results = @json["results"]
+        @result_count = @stats[:total]
       else
-        self.errors = @json["results"].values
-       end
+        @errors = @json["results"].values
+      end
     end
 
     def parse_get
-      self.result_count = @json['numResults']
-      self.results = @json['results']
+      @result_count = @json['numResults']
+      @results = @json['results']
     end
 
     def has_error?

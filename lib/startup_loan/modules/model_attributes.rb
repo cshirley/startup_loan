@@ -83,8 +83,11 @@ module StartupLoan
     def handled_by_attributes_module?(method, *args, &_block)
       attribute_name = method.to_s.split('=')
       fail StandardError.new("missing_method") unless has_attribute?(attribute_name.first)
-      method.to_s[-1] == '=' ? set_attribute(attribute_name.first, args.first)
-                             : get_attribute(attribute_name.first)
+      if method.to_s[-1] == '='
+        set_attribute(attribute_name.first, args.first)
+      else
+        get_attribute(attribute_name.first)
+      end
     end
   end
 end

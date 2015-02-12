@@ -4,7 +4,8 @@ module StartupLoan
 
     VALID_RESOURCE_ACTIONS = [:search, :add, :update]
 
-    attr_accessor :connection
+    attr_reader :connection
+    attr_reader :is_new
 
     set_required_attribute_keys []
     set_attribute_keys []
@@ -13,10 +14,6 @@ module StartupLoan
     def initialize(connection, options = {}, loaded_from_server = false)
       @connection = connection
       set_all_attributes(options, loaded_from_server)
-    end
-
-    def is_new?
-      @is_new
     end
 
     def self.resource_name
@@ -42,7 +39,7 @@ module StartupLoan
       return self unless is_dirty?
       self.referral_partner = 0
       options = { self.class.resource_name => [build_changed_data] }
-      url = self.class.build_url(is_new? ? :add : :update)
+      url = self.class.build_url(is_new ? :add : :update)
       response = connection.query_post_api(url, options)
       fail StartupLoan::ApiException.new(0, url, response.errors) unless response.success
       set_all_attributes(response.results.first, true)
