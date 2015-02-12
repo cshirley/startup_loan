@@ -5,7 +5,7 @@ module StartupLoan
     end
 
     def applicant_dupe_search(email_address)
-      applicants(emailaddress: email_address).select(&:is_duplicate?)
+      applicants(emailaddress: email_address).select(&:duplicate?)
     end
   end
 end

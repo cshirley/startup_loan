@@ -21,15 +21,15 @@ module StartupLoan
         class_variable_get('@@attribute_id_keys') || []
       end
 
-      def is_read_only?(key)
+      def read_only?(key)
         (class_variable_get('@@read_only_attribute') || []).include?(key)
       end
 
-      def is_required?(key)
+      def required?(key)
         (class_variable_get('@@required_attribute') || []).include?(key)
       end
 
-      def is_id?(key)
+      def id?(key)
         (class_variable_get('@@attribute_id_keys') || []).include?(key)
       end
     end
@@ -38,26 +38,26 @@ module StartupLoan
       @attributes ||= {}
     end
 
-    def is_dirty?
+    def dirty?
       get_dirty_attributes.size > 0
     end
 
-    def has_attribute?(key)
+    def attribute?(key)
       attributes && attributes.key?(key.gsub(/=/, ''))
     end
 
     def get_dirty_attributes
-      attributes ? attributes.select { |_k, v| v[:is_dirty] || v[:is_key] } : []
+      attributes ? attributes.select { |_k, v| v[:dirty] || v[:is_key] } : []
     end
 
     def clear_dirty_flags
       attributes.each do |k, v|
-        attributes[k] = { old_value: v[:value], value: v[:value], is_dirty: false }
+        attributes[k] = { old_value: v[:value], value: v[:value], dirty: false }
       end
     end
 
     def get_attribute(key)
-      has_attribute?(key) ? attributes[key][:value] : nil
+      attribute?(key) ? attributes[key][:value] : nil
     end
 
     def set_all_attributes(attributes, loaded = false)
@@ -74,16 +74,16 @@ module StartupLoan
     def set_attribute(key, value, loaded = false)
       attributes[key] = { old_value: get_attribute(key) || value,
                           value: value,
-                          is_dirty: !loaded || get_attribute(key) == value,
-                          is_key: self.class.is_id?(key),
-                          is_read_only: self.class.is_read_only?(key),
-                          is_required: false}
+                          dirty: !loaded || get_attribute(key) == value,
+                          is_key: self.class.id?(key),
+                          is_read_only: self.class.read_only?(key),
+                          is_required: false }
       true
     end
 
     def handled_by_attributes_module?(method, *args, &_block)
       attribute_name = method.to_s.split('=')
-      fail StandardError.new('missing_method') unless has_attribute?(attribute_name.first)
+      fail StandardError.new('missing_method') unless attribute?(attribute_name.first)
       if method.to_s[-1] == '='
         set_attribute(attribute_name.first, args.first)
       else

@@ -2,7 +2,7 @@ module StartupLoan
   class Client
     include ApplicantExtension
 
-    DEFAULT_OPTIONS = {debug: false, logfile_path: 'startup_loans.log'}
+    DEFAULT_OPTIONS = { debug: false, logfile_path: 'startup_loans.log' }
 
     attr_accessor :base_uri, :api_key, :debug, :logfile_path
 

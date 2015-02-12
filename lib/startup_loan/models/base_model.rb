@@ -36,7 +36,7 @@ module StartupLoan
     end
 
     def save
-      return self unless is_dirty?
+      return self unless dirty?
       self.referral_partner = 0
       options = { self.class.resource_name => [build_changed_data] }
       url = self.class.build_url(is_new ? :add : :update)

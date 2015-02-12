@@ -33,7 +33,7 @@ describe 'ReferenceData API' do
       filtered = StartupLoan::ReferenceData.find(client, type: reference_type_names.first)
       reference_data_item = filtered.first
       reference_data_item.description = 'hello world'
-      expect(reference_data_item.is_dirty?).to be true
+      expect(reference_data_item.dirty?).to be true
       expect do
         reference_data_item.save
       end.to raise_error(StartupLoan::NotSupported)

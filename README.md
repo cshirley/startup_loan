@@ -37,7 +37,7 @@ query_options = { emailaddress:"email_address",
                   postcode:"post_code",
                   phone_number:"phonenumber" }
 
-true_or_false = StartupLoan::Applicant.has_duplicate?(client, query_options)
+true_or_false = StartupLoan::Applicant.duplicates?(client, query_options)
 ```
 
 

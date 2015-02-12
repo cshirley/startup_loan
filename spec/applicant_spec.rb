@@ -36,17 +36,17 @@ describe 'Applicant API' do
 
   it 'checks for duplicate' do
     VCR.use_cassette('applicants_duplicate_check_success') do
-      result = StartupLoan::Applicant.has_duplicate?(client, surname: 'shirley')
+      result = StartupLoan::Applicant.duplicates?(client, surname: 'shirley')
       expect(result).to be true
     end
   end
 
   it 'Adds applicant Registration state' do
     pending 'Waiting on startuploans'
-    #VCR.use_cassette("application_add_new_registration") do
+    # VCR.use_cassette("application_add_new_registration") do
     applicant = StartupLoan::Applicant.new(client, new_applicant)
     applicant.save
-    #end
+    # end
   end
 
   it 'Updates applicant' do

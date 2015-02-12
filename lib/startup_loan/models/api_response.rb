@@ -5,7 +5,7 @@ module StartupLoan
 
     def initialize(data)
       @json = JSON.parse(data)
-      @success = @json['success'] && !has_error?
+      @success = @json['success'] && !error?
       @json['results'].is_a?(Hash) ? parse_post : parse_get
     end
 
@@ -26,9 +26,9 @@ module StartupLoan
       @results = @json['results']
     end
 
-    def has_error?
+    def error?
       @json['results'].is_a?(Hash) &&
-        @json['results'].has_key?('failed') &&
+        @json['results'].key?('failed') &&
         @json['results']['failed'] > 0
     end
   end
