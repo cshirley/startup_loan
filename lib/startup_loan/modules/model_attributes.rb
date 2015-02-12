@@ -6,31 +6,31 @@ module StartupLoan
 
     module ClassMethods
       def set_required_attribute_keys(keys)
-        class_variable_set("@@required_attribute", keys.dup)
+        class_variable_set('@@required_attribute', keys.dup)
       end
 
       def set_attribute_keys(keys)
-        class_variable_set("@@attribute_id_keys", keys.dup)
+        class_variable_set('@@attribute_id_keys', keys.dup)
       end
 
       def set_read_only_attribute_keys(keys)
-        class_variable_set("@@read_only_attribute", keys.dup)
+        class_variable_set('@@read_only_attribute', keys.dup)
       end
 
       def attribute_id_keys
-        class_variable_get("@@attribute_id_keys") || []
+        class_variable_get('@@attribute_id_keys') || []
       end
 
       def is_read_only?(key)
-        (class_variable_get("@@read_only_attribute") || []).include?(key)
+        (class_variable_get('@@read_only_attribute') || []).include?(key)
       end
 
       def is_required?(key)
-        (class_variable_get("@@required_attribute") || []).include?(key)
+        (class_variable_get('@@required_attribute') || []).include?(key)
       end
 
       def is_id?(key)
-        (class_variable_get("@@attribute_id_keys") || []).include?(key)
+        (class_variable_get('@@attribute_id_keys') || []).include?(key)
       end
     end
 
@@ -47,7 +47,7 @@ module StartupLoan
     end
 
     def get_dirty_attributes
-      attributes ? attributes.select { |_k, v| v[:is_dirty] } : []
+      attributes ? attributes.select { |_k, v| v[:is_dirty] || v[:is_key] } : []
     end
 
     def clear_dirty_flags
@@ -76,13 +76,14 @@ module StartupLoan
                           value: value,
                           is_dirty: !loaded || get_attribute(key) == value,
                           is_key: self.class.is_id?(key),
-                          is_read_only: self.class.is_read_only?(key) }
+                          is_read_only: self.class.is_read_only?(key),
+                          is_required: false}
       true
     end
 
     def handled_by_attributes_module?(method, *args, &_block)
       attribute_name = method.to_s.split('=')
-      fail StandardError.new("missing_method") unless has_attribute?(attribute_name.first)
+      fail StandardError.new('missing_method') unless has_attribute?(attribute_name.first)
       if method.to_s[-1] == '='
         set_attribute(attribute_name.first, args.first)
       else

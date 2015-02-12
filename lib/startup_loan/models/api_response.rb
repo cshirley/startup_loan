@@ -10,14 +10,14 @@ module StartupLoan
     end
 
     def parse_post
-      @stats = { failed:  @json["results"].delete("failed"),
-                 success: @json["results"].delete("successful"),
-                 total:   @json["results"].delete("total") }
+      @stats = { failed:  @json['results'].delete('failed'),
+                 success: @json['results'].delete('successful'),
+                 total:   @json['results'].delete('total') }
       if success
-        @results = @json["results"]
+        @results = @json['results']
         @result_count = @stats[:total]
       else
-        @errors = @json["results"].values
+        @errors = @json['results'].values
       end
     end
 
@@ -28,9 +28,8 @@ module StartupLoan
 
     def has_error?
       @json['results'].is_a?(Hash) &&
-        @json['results'].has_key?("failed") &&
-        @json['results']["failed"] > 0
+        @json['results'].has_key?('failed') &&
+        @json['results']['failed'] > 0
     end
   end
 end
-

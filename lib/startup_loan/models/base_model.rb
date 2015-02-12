@@ -55,13 +55,10 @@ module StartupLoan
     end
 
     def build_changed_data
-      attributes_to_include = get_dirty_attributes.keys + self.class.attribute_id_keys
-      attributes_to_include.inject({}) do |h, k|
-        attribute_value = attributes[k][:value] || "" rescue nil
-        if attribute_value && !attribute_value.to_s.empty?
-          h[k] = attribute_value
-        end
-        h
+      get_dirty_attributes.inject({}) do |injected_hash, hash_item|
+        key, value = hash_item
+        injected_hash[key] = value unless value && !value.to_s.empty?
+        injected_hash
       end
     end
 

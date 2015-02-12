@@ -7,10 +7,8 @@ module Faraday
     end
 
     def check_status(headers)
-      if headers && headers.has_key?("location") &&
-         headers["location"].include?("denied")
-        fail StartupLoan::AuthenticationError.new(401, "Access Denied")
-      end
+      return unless headers && headers.has_key?('location') && headers['location'].include?('denied')
+      fail StartupLoan::AuthenticationError.new(401, 'Access Denied')
     end
   end
 end

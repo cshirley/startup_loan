@@ -2,11 +2,17 @@ module StartupLoan
   class Client
     include ApplicantExtension
 
-    DEFAULT_OPTIONS = {debug:false, logfile_path:"startup_loans.log"}
+    DEFAULT_OPTIONS = {debug: false, logfile_path: 'startup_loans.log'}
 
     attr_accessor :base_uri, :api_key, :debug, :logfile_path
 
     def initialize(options = { base_uri: nil, api_key: nil })
+      initialize_attributes(options)
+
+      logger.level = Logger::DEBUG if debug
+    end
+
+    def initialize_attributes(options)
       options = DEFAULT_OPTIONS.merge(options)
 
       fail ArgumentError.new('You must specifiy valid options') unless options.keys.count > 0
@@ -15,8 +21,6 @@ module StartupLoan
         fail ArgumentError.new("#{k} can not be nil or empty") if v.nil? || v.to_s.empty?
         send("#{k}=", v)
       end
-
-      logger.level = Logger::DEBUG if debug
     end
 
     def make_request_url(url, options)
@@ -28,7 +32,7 @@ module StartupLoan
     end
 
     def query_post_api(url, options)
-      options.merge!(accessKey:api_key)
+      options.merge!(accessKey: api_key)
       response = session.post do |req|
         req.url url
         req.headers['Content-Type'] = 'application/json'
@@ -38,7 +42,7 @@ module StartupLoan
     end
 
     def query_post_file(url, options, field_name, file_path)
-      options.merge!(accessKey:api_key)
+      options.merge!(accessKey: api_key)
       mime_type = get_mime_type(file_path)
       options[field_name] = Faraday::UploadIO.new(file_path, mime_type)
       response = session.post url, options
@@ -48,11 +52,11 @@ module StartupLoan
     private
 
     def get_mime_type(file_path)
-      `file -ib #{file_path}`.split(";").first
+      `file -ib #{file_path}`.split(';').first
     end
 
     def build_params(options)
-      options.merge!(accessKey:api_key)
+      options.merge!(accessKey: api_key)
       to_query(options)
     end
 
