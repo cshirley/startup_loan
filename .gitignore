@@ -13,3 +13,4 @@
 *.a
 *.log
 mkmf.log
+.coveralls.yml
