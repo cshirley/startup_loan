@@ -6,9 +6,9 @@ describe "ReferenceData API" do
   it "lists all" do
     VCR.use_cassette("reference_data_list_all") do
       all = StartupLoan::ReferenceData.find(client)
-      found_reference_type_names = all.inject([]) {|a, rd|
+      found_reference_type_names = all.inject([]) do|a, rd|
         a << rd.reference_type_name
-      }
+      end
       expect(found_reference_type_names).to match_array(reference_type_names)
     end
   end

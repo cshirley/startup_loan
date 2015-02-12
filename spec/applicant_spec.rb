@@ -3,22 +3,24 @@ require 'spec_helper'
 describe "Applicant API" do
   include_context "configuration"
 
-  let(:new_applicant) { { "journeystatus"=>1,
-                          "manadd"=>1,
-                          "firstname"=>"clive", "surname"=>"shirley",
-                          "dob"=>"1971-09-14",
-                          "address1"=>"1 Croydon",
-                          "address2"=>"12 Addiscomb Road",
-                          "citytown"=>"Croydon",
-                          "county"=>"surrey",
-                          "postcode"=>"CR00PG",
-                          "emailaddress"=>"test_user@foobar.com",
-                          "telephone"=>"0777777777",
-                          "gender"=>"Male",
-                          "wherehearnew"=>14,
-                          "marketingagree"=>1,
-                          "referral_partner"=>0,
-                          "subdate"=>"#{Time.now}" } }
+  let(:new_applicant) do
+    { "journeystatus"=>1,
+      "manadd"=>1,
+      "firstname"=>"clive", "surname"=>"shirley",
+      "dob"=>"1971-09-14",
+      "address1"=>"1 Croydon",
+      "address2"=>"12 Addiscomb Road",
+      "citytown"=>"Croydon",
+      "county"=>"surrey",
+      "postcode"=>"CR00PG",
+      "emailaddress"=>"test_user@foobar.com",
+      "telephone"=>"0777777777",
+      "gender"=>"Male",
+      "wherehearnew"=>14,
+      "marketingagree"=>1,
+      "referral_partner"=>0,
+      "subdate"=>"#{Time.now}" }
+  end
   it "lists all applicants" do
     VCR.use_cassette("applicants_list_all_success") do
       partner_applicants = StartupLoan::Applicant.find(client)
@@ -33,12 +35,11 @@ describe "Applicant API" do
   end
 
   it "checks for duplicate" do
-     VCR.use_cassette("applicants_duplicate_check_success") do
+    VCR.use_cassette("applicants_duplicate_check_success") do
       result = StartupLoan::Applicant.has_duplicate?(client, surname:"shirley")
       expect(result).to be true
     end
   end
-
 
   it "Adds applicant Registration state" do
     #VCR.use_cassette("application_add_new_registration") do
@@ -55,9 +56,9 @@ describe "Applicant API" do
   end
 
   it "Updates applicant" do
-    partner_applicants = StartupLoan::Applicant.find(client, {journeystatus:1})
+    partner_applicants = StartupLoan::Applicant.find(client, journeystatus:1)
     applicant = partner_applicants.first
-    applicant.loanamount = 10000
+    applicant.loanamount = 10_000
     applicant.save
   end
 end

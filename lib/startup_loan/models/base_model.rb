@@ -1,6 +1,5 @@
 module StartupLoan
   class BaseModel
-
     include ModelAttributes
 
     VALID_RESOURCE_ACTIONS = [:search, :add, :update]
@@ -10,7 +9,6 @@ module StartupLoan
     set_required_attribute_keys []
     set_attribute_keys []
     set_read_only_attribute_keys []
-
 
     def initialize(connection, options = {}, loaded_from_server = false)
       @connection = connection
@@ -46,7 +44,7 @@ module StartupLoan
       options = { self.class.resource_name => [build_changed_data] }
       url = self.class.build_url(is_new? ? :add : :update)
       response = connection.query_post_api(url, options)
-      raise StartupLoan::ApiException.new(0, url, response.errors) unless response.success
+      fail StartupLoan::ApiException.new(0, url, response.errors) unless response.success
       set_all_attributes(response.results.first, true)
       self
     end
@@ -59,11 +57,10 @@ module StartupLoan
       true
     end
 
-
     def build_changed_data
       attributes_to_include = get_dirty_attributes.keys + self.class.attribute_id_keys
       attributes_to_include.inject({}) do |h, k|
-        attribute_value = self.attributes[k][:value] || "" rescue nil
+        attribute_value = attributes[k][:value] || "" rescue nil
         if attribute_value && !attribute_value.to_s.empty?
           h[k] = attribute_value
         end
@@ -76,6 +73,5 @@ module StartupLoan
     rescue
       super
     end
-
   end
 end

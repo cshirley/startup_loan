@@ -1,13 +1,10 @@
 module StartupLoan
-
   module ModelAttributes
-
     def self.included(base)
       base.extend ClassMethods
     end
 
     module ClassMethods
-
       def set_required_attribute_keys(keys)
         class_variable_set("@@required_attribute", keys.dup)
       end
@@ -35,9 +32,7 @@ module StartupLoan
       def is_id?(key)
         (class_variable_get("@@attribute_id_keys") || []).include?(key)
       end
-
     end
-
 
     def attributes
       @attributes ||= {}
@@ -48,21 +43,21 @@ module StartupLoan
     end
 
     def has_attribute?(key)
-      self.attributes && self.attributes.key?(key.gsub(/=/, ''))
+      attributes && attributes.key?(key.gsub(/=/, ''))
     end
 
     def get_dirty_attributes
-      self.attributes ? self.attributes.select { |_k, v| v[:is_dirty] } : []
+      attributes ? attributes.select { |_k, v| v[:is_dirty] } : []
     end
 
     def clear_dirty_flags
-      self.attributes.each do |k, v|
-        self.attributes[k] = { old_value: v[:value], value: v[:value], is_dirty: false }
+      attributes.each do |k, v|
+        attributes[k] = { old_value: v[:value], value: v[:value], is_dirty: false }
       end
     end
 
     def get_attribute(key)
-      has_attribute?(key) ? self.attributes[key][:value] : nil
+      has_attribute?(key) ? attributes[key][:value] : nil
     end
 
     def set_all_attributes(attributes, loaded = false)
@@ -77,20 +72,19 @@ module StartupLoan
     end
 
     def set_attribute(key, value, loaded = false)
-      self.attributes[key] = { old_value: get_attribute(key) || value,
-                               value: value,
-                               is_dirty: !loaded || get_attribute(key) == value,
-                               is_key: self.class.is_id?(key),
-                               is_read_only: self.class.is_read_only?(key) }
+      attributes[key] = { old_value: get_attribute(key) || value,
+                          value: value,
+                          is_dirty: !loaded || get_attribute(key) == value,
+                          is_key: self.class.is_id?(key),
+                          is_read_only: self.class.is_read_only?(key) }
       true
     end
 
-    def handled_by_attributes_module?(method, *args, &block)
+    def handled_by_attributes_module?(method, *args, &_block)
       attribute_name = method.to_s.split('=')
-      raise StandardError.new("missing_method") unless has_attribute?(attribute_name.first)
+      fail StandardError.new("missing_method") unless has_attribute?(attribute_name.first)
       method.to_s[-1] == '=' ? set_attribute(attribute_name.first, args.first)
                              : get_attribute(attribute_name.first)
     end
-
   end
 end

@@ -7,20 +7,16 @@ module StartupLoan
     attr_accessor :base_uri, :api_key, :debug, :logfile_path
 
     def initialize(options = { base_uri: nil, api_key: nil })
-
       options = DEFAULT_OPTIONS.merge(options)
 
       fail ArgumentError.new('You must specifiy valid options') unless options.keys.count > 0
 
       options.each do |k, v|
-
         fail ArgumentError.new("#{k} can not be nil or empty") if v.nil? || v.to_s.empty?
         send("#{k}=", v)
-
       end
 
-      logger.level = Logger::DEBUG
-
+      logger.level = Logger::DEBUG if debug
     end
 
     def make_request_url(url, options)

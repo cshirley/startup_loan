@@ -9,16 +9,16 @@ module StartupLoan
     end
 
     def parse_post
-       failed_count =  @json["results"].delete("failed")
-       success_count =  @json["results"].delete("successful")
-       total_count =  @json["results"].delete("total")
+      failed_count =  @json["results"].delete("failed")
+      success_count =  @json["results"].delete("successful")
+      total_count =  @json["results"].delete("total")
 
-       if self.success
-         self.results = @json["results"]
-         self.result_count = total_count
-        else
-          self.errors = @json["results"].values
-        end
+      if success
+        self.results = @json["results"]
+        self.result_count = total_count
+      else
+        self.errors = @json["results"].values
+       end
     end
 
     def parse_get
