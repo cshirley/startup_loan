@@ -13,8 +13,9 @@ module StartupLoan
     end
 
     def self.process_response(connection, response)
-      response.results.inject([]) do |arr, data_item|
-        data = { "reference_type_name" => data_item[0] }.merge(data_item[1])
+      response.results.inject([]) do |arr, hash_item|
+        k,v = hash_item
+        data = { "reference_type_name" => k }.merge(v)
         arr << new(connection, data, true)
       end
     end

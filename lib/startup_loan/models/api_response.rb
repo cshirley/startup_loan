@@ -15,7 +15,7 @@ module StartupLoan
 
        if self.success
          self.results = @json["results"]
-         self.result_cont = total_count
+         self.result_count = total_count
         else
           self.errors = @json["results"].values
         end

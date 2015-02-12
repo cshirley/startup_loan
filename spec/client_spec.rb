@@ -18,7 +18,7 @@ describe "client" do
       VCR.use_cassette("client_session_invalid_api_key") do
         expect do
           invalid_client = StartupLoan::Client.new( settings.merge(api_key:"foobar") )
-          invalid_client.applicants
+          invalid_client.applicant_search
         end.to raise_error(StartupLoan::AuthenticationError)
       end
     end
