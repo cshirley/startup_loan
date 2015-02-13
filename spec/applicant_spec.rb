@@ -61,14 +61,7 @@ describe 'Applicant API' do
   it 'Adds applicant Registration state' do
     VCR.use_cassette("application_add_new_registration") do
       applicant = StartupLoan::Applicant.new(client, new_applicant)
-      begin
       applicant.save
-      rescue StartupLoan::ApiException => ex
-        ex.errors.each { |e|
-          puts e
-        }
-        raise
-      end
     end
   end
 
@@ -76,8 +69,9 @@ describe 'Applicant API' do
     VCR.use_cassette("application_update_existing_registration") do
       partner_applicants = StartupLoan::Applicant.find(client, journeystatus: 1)
       applicant = partner_applicants.first
+      original_applicant_id = applicant.appid
       applicant.loanamount = 10000
-      applicant.save
+      expect(applicant.save.appid).to eq original_applicant_id
     end
   end
 end

@@ -10,6 +10,7 @@ module StartupLoan
     end
 
     def parse_post
+
       @stats = { failed:  @json['results'].delete('failed'),
                  success: @json['results'].delete('successful'),
                  total:   @json['results'].delete('total') }
