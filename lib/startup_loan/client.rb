@@ -41,14 +41,6 @@ module StartupLoan
       ApiResponse.new response.body
     end
 
-    def query_post_file(url, options, field_name, file_path)
-      options.merge!(accessKey: api_key)
-      mime_type = get_mime_type(file_path)
-      options[field_name] = Faraday::UploadIO.new(file_path, mime_type)
-      response = session.post url, options
-      JSON.parse(response.body)
-    end
-
     private
 
     def get_mime_type(file_path)
@@ -74,6 +66,7 @@ module StartupLoan
         conn.request :multipart
         conn.adapter Faraday.default_adapter
         conn.use Faraday::Response::StartupLoan
+        conn.headers[:user_agent] =  "startup_loans_ruby_gem #{VERSION}"
       end
     end
   end

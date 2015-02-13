@@ -47,7 +47,9 @@ module StartupLoan
     end
 
     def get_dirty_attributes
-      attributes ? attributes.select { |_k, v| v[:dirty] || v[:is_key] } : []
+      attributes.select { |k, v|
+        v[:is_key] || self.class.required?(k) || v[:dirty]
+      }
     end
 
     def clear_dirty_flags
@@ -60,9 +62,9 @@ module StartupLoan
       attribute?(key) ? attributes[key][:value] : nil
     end
 
-    def set_all_attributes(attributes, loaded = false)
+    def set_all_attributes(new_attributes, loaded = false)
       @is_new = !loaded
-      attributes.each do |k, v|
+      new_attributes.each do |k, v|
         if self.respond_to? k
           send("#{k}=", v)
         else
@@ -72,12 +74,12 @@ module StartupLoan
     end
 
     def set_attribute(key, value, loaded = false)
-      attributes[key] = { old_value: get_attribute(key) || value,
-                          value: value,
-                          dirty: !loaded || get_attribute(key) == value,
-                          is_key: self.class.id?(key),
-                          is_read_only: self.class.read_only?(key),
-                          is_required: false }
+      self.attributes[key] = { old_value: get_attribute(key) || value,
+                              value: value,
+                              dirty: !loaded || get_attribute(key) == value,
+                              is_key: self.class.id?(key),
+                              is_read_only: self.class.read_only?(key),
+                              is_required: false }
       true
     end
 

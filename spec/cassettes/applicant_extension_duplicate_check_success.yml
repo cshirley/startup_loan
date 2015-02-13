@@ -1,0 +1,40 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.uat.sulserver.net/applicants/search?accessKey=iGy8G5dUmr9HXINAOc7MIG9m1bd8bv8K&emailaddress=clive.shirley@mac.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - startup_loans_ruby_gem 0.0.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 13 Feb 2015 11:51:30 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Frame-Options:
+      - SAMEORIGIN
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"numResults":0,"results":[]}'
+    http_version: 
+  recorded_at: Fri, 13 Feb 2015 11:51:30 GMT
+recorded_with: VCR 2.9.3

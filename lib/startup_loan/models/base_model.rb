@@ -37,29 +37,37 @@ module StartupLoan
 
     def save
       return self unless dirty?
-      self.referral_partner = 0
       options = { self.class.resource_name => [build_changed_data] }
       url = self.class.build_url(is_new ? :add : :update)
       response = connection.query_post_api(url, options)
       fail StartupLoan::ApiException.new(0, url, response.errors) unless response.success
-      set_all_attributes(response.results.first, true)
+      set_all_attributes(response.results['0'], true)
       self
     end
 
-    def reload
-      response = self.class.find(connection, id: id)
-      return false if response['size'] ==  0
-      remote_data = response[self.class.resource_name].select { |model_instance| model_instance.id == id }.first
-      set_all_attributes(remote_data, true)
+    def reload!
+      response = self.class.find(connection, build_find_by_remote_key)
+      return false unless response.count == 1
+      remote_data = response.first
+      set_all_attributes(remote_data.attributes, true)
       true
     end
 
+    def build_find_by_remote_key
+      keys = self.class.attribute_id_keys
+      keys.inject({}) { |h, k|
+        h[k] = get_attribute(k)
+        h
+      }
+    end
     def build_changed_data
-      get_dirty_attributes.inject({}) do |injected_hash, hash_item|
-        key, value = hash_item
-        injected_hash[key] = value unless value && !value.to_s.empty?
+      data = get_dirty_attributes.inject({}) do |injected_hash, hash_item|
+        key, value = hash_item.first, hash_item.last[:value]
+        injected_hash[key] = value if value && !value.to_s.empty?
         injected_hash
       end
+      data.merge!(build_find_by_remote_key) unless is_new
+      data
     end
 
     def method_missing(method, *args, &block)

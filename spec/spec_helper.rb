@@ -1,10 +1,10 @@
 require 'byebug'
+require 'simplecov'
 require 'startup_loan'
 require 'spec_configuration'
 require 'vcr'
 require 'coveralls'
 require 'openssl'
-require 'simplecov'
 
 OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 
