@@ -1,5 +1,6 @@
 [![Circle CI](https://circleci.com/gh/cshirley/startup_loan.svg?style=svg)](https://circleci.com/gh/cshirley/startup_loan)
 [![Coverage Status](https://coveralls.io/repos/cshirley/startup_loan/badge.svg?branch=master)](https://coveralls.io/r/cshirley/startup_loan?branch=master)
+[![Code Climate](https://codeclimate.com/github/cshirley/startup_loan/badges/gpa.svg)](https://codeclimate.com/github/cshirley/startup_loan)
 # Startup Loans
 
 API wrapper for http://www.startuploans.com leveraging Faraday.
