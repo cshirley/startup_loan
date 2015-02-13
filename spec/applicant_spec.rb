@@ -32,9 +32,9 @@ describe 'Applicant API' do
       applicant = result.first
       applicant_org = applicant.dup
       expect(applicant.reload!).to eq true
-      applicant_org.attributes.keys.each { |k|
+      applicant_org.attributes.keys.each do |k|
         expect(applicant_org.send(k)).to eq applicant.send(k)
-      }
+      end
     end
   end
 
@@ -54,23 +54,23 @@ describe 'Applicant API' do
 
   it 'checks for duplicate throught the applicant extension' do
     VCR.use_cassette('applicant_extension_duplicate_check_success') do
-      expect(client.applicant_dupe_search("clive.shirley@mac.com").empty?).to be true
+      expect(client.applicant_dupe_search('clive.shirley@mac.com').empty?).to be true
     end
   end
 
   it 'Adds applicant Registration state' do
-    VCR.use_cassette("application_add_new_registration") do
+    VCR.use_cassette('application_add_new_registration') do
       applicant = StartupLoan::Applicant.new(client, new_applicant)
       applicant.save
     end
   end
 
   it 'Updates applicant' do
-    VCR.use_cassette("application_update_existing_registration") do
+    VCR.use_cassette('application_update_existing_registration') do
       partner_applicants = StartupLoan::Applicant.find(client, journeystatus: 1)
       applicant = partner_applicants.first
       original_applicant_id = applicant.appid
-      applicant.loanamount = 10000
+      applicant.loanamount = 10_000
       expect(applicant.save.appid).to eq original_applicant_id
     end
   end

@@ -26,7 +26,7 @@ describe 'client' do
 
   describe 'transport support' do
     it 'returns the mimetype for the file' do
-      expect(client.send :get_mime_type, __FILE__).to eq "text/x-ruby"
+      expect(client.send :get_mime_type, __FILE__).to eq 'text/x-ruby'
     end
   end
 end

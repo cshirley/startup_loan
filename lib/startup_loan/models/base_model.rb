@@ -55,11 +55,12 @@ module StartupLoan
 
     def build_find_by_remote_key
       keys = self.class.attribute_id_keys
-      keys.inject({}) { |h, k|
+      keys.inject({}) do |h, k|
         h[k] = get_attribute(k)
         h
-      }
+      end
     end
+
     def build_changed_data
       data = get_dirty_attributes.inject({}) do |injected_hash, hash_item|
         key, value = hash_item.first, hash_item.last[:value]

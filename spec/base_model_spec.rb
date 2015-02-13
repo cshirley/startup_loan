@@ -11,16 +11,16 @@ describe 'base_model' do
     end
 
     it 'raises method missing' do
-       expect { mock_model.foo_bar }.to raise_error
+      expect { mock_model.foo_bar }.to raise_error
     end
 
     it 'sets accessor rather than using method missing if accessor exists' do
       expect_any_instance_of(MockAccessorModel).to receive(:description=)
       obj = MockAccessorModel.new(client, attributes)
-      obj.set_all_attributes({description:"foo bar"})
+      obj.set_all_attributes(description: 'foo bar')
     end
     it 'clears all dirty flags' do
-      mock_model.name = "updated name"
+      mock_model.name = 'updated name'
       expect(mock_model.dirty?).to be true
       mock_model.clear_dirty_flags
       expect(mock_model.dirty?).to be false
